@@ -2,8 +2,8 @@
 
 @theme {
   --color-cdi-bg: #0D0B0A;
-  --color-cdi-bg-alt: #1A1512;
-  --color-cdi-surface: #221C17;
+  --color-cdi-bg-alt: #2A1F17;
+  --color-cdi-surface: #2E241C;
   --color-cdi-accent: #E8831A;
   --color-cdi-accent-dark: #C9630F;
   --color-cdi-gold: #D4A04A;
@@ -11,8 +11,8 @@
   --color-cdi-text-muted: #A89880;
   --color-cdi-border: #3D2E21;
 
-  --font-display: "Syne", sans-serif;
-  --font-body: "Inter", sans-serif;
+  --font-display: "Satoshi", sans-serif;
+  --font-body: "Satoshi", sans-serif;
 
   /* Typography scale tokens */
   --font-size-hero: clamp(3rem, 10vw, 10rem);
