@@ -39,6 +39,13 @@ const ogImage = new URL('/og-image.png', Astro.site);
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
 
+    <!-- Satoshi font from Fontshare -->
+    <link rel="preconnect" href="https://api.fontshare.com" />
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400,300&display=swap" />
+
+    <!-- reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6Lf_cZksAAAAALlJFbjlv52Tpw6548awLle2vW69" async defer></script>
+
     <!-- Progressive enhancement: set js-enabled before first paint -->
     <script>document.documentElement.classList.add('js-enabled')</script>
   </head>
