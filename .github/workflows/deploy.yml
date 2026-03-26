@@ -34,5 +34,6 @@ jobs:
           server: a0090955.ferozo.com
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
+          protocol: ftps
           local-dir: ./dist/
           server-dir: /public_html/
