@@ -29,11 +29,13 @@ jobs:
         run: pnpm build
 
       - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: a0090955.ferozo.com
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASS }}
-          protocol: ftps
-          local-dir: ./dist/
-          server-dir: /public_html/
+        run: |
+          sudo apt-get install -y -qq lftp
+          lftp -u "${{ secrets.FTP_USER }},${{ secrets.FTP_PASS }}" "ftps://a0090955.ferozo.com" -e "
+            set ssl:verify-certificate false;
+            set ftp:ssl-protect-data true;
+            set net:max-retries 3;
+            set net:timeout 30;
+            mirror --reverse --delete --verbose --parallel=2 ./dist/ /public_html/;
+            quit
+          "
