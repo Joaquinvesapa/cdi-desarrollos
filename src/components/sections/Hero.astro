@@ -2,23 +2,33 @@
 import Button from '../ui/Button.astro';
 ---
 
-<section id="main-content" class="relative min-h-screen flex items-center justify-center overflow-hidden">
-  <!-- Radial ambient light effect (FR-03) -->
-  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--color-cdi-accent)_0%,_transparent_70%)] opacity-[0.07]"></div>
-  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,_var(--color-cdi-accent)_0%,_transparent_60%)] opacity-[0.05] blur-3xl"></div>
-
-  <div class="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center pt-20">
-    <h1 class="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight mb-6 animate-on-scroll">
-      Construimos software que
+<section
+  id="main-content"
+  class="editorial-section w-full min-h-svh grid place-items-center overflow-hidden bg-cdi-bg"
+>
+  <div class="w-full">
+    <h1
+      class="type-hero font-display font-extrabold text-cdi-text"
+      data-hero-title
+    >
+      Construimos software que<br />
       <span class="text-cdi-accent">impulsa tu negocio</span>
     </h1>
 
-    <p class="text-cdi-text-muted text-lg sm:text-xl md:text-2xl max-w-2xl mx-auto mb-10 leading-relaxed animate-on-scroll">
+    <p
+      class="text-[clamp(1.125rem,2vw,1.5rem)] leading-relaxed text-cdi-text-muted max-w-[36ch] mt-6"
+      data-hero-subtitle
+      data-reveal
+    >
       Soluciones digitales a medida para empresas que quieren crecer.
       Diseño, desarrollo y acompañamiento real.
     </p>
 
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-on-scroll">
+    <div
+      class="flex flex-col sm:flex-row items-center sm:items-start gap-4 mt-10"
+      data-hero-ctas
+      data-reveal
+    >
       <Button variant="primary" href="#contacto" label="Hablemos" />
       <Button variant="ghost" href="#servicios" label="Conocé nuestros servicios" />
     </div>

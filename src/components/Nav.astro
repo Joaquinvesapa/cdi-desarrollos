@@ -7,11 +7,11 @@ const navLinks = [
 ];
 ---
 
-<nav id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<nav id="main-nav" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300">
+  <div class="px-[clamp(1rem,4vw,3rem)]">
     <div class="flex h-20 items-center justify-between">
       <!-- Logo -->
-      <a href="#" class="font-display font-extrabold text-xl text-cdi-text tracking-tight">
+      <a href="#" class="font-display font-extrabold text-[clamp(1rem,1.5vw,1.25rem)] text-cdi-text tracking-[-0.02em]">
         CDI <span class="text-cdi-accent">Desarrollos</span>
       </a>
 
@@ -20,30 +20,30 @@ const navLinks = [
         {navLinks.map((link) => (
           <a
             href={link.href}
-            class="text-cdi-text-muted hover:text-cdi-accent transition-colors duration-200 text-sm font-medium"
+            class="nav-link text-[0.8125rem] text-cdi-text-muted hover:text-cdi-accent transition-colors duration-200 font-medium"
           >
             {link.label}
           </a>
         ))}
         <a
           href="#contacto"
-          class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-cdi-accent text-cdi-bg font-semibold text-sm transition-all duration-300 hover:bg-cdi-accent-dark hover:scale-105"
+          class="nav-link inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-cdi-accent text-cdi-bg font-semibold text-sm transition-all duration-300 hover:bg-cdi-accent-dark hover:scale-105"
         >
           Hablemos
         </a>
       </div>
 
-      <!-- Hamburger -->
+      <!-- Hamburger: 3 spans for GSAP targeting -->
       <button
-        id="menu-toggle"
+        id="hamburger-btn"
         type="button"
         class="lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 cursor-pointer"
         aria-label="Abrir menú"
         aria-expanded="false"
       >
-        <span class="hamburger-line w-6 h-0.5 bg-cdi-text transition-all duration-300"></span>
-        <span class="hamburger-line w-6 h-0.5 bg-cdi-text transition-all duration-300"></span>
-        <span class="hamburger-line w-6 h-0.5 bg-cdi-text transition-all duration-300"></span>
+        <span data-nav-line="1" class="block w-6 h-0.5 bg-cdi-text"></span>
+        <span data-nav-line="2" class="block w-6 h-0.5 bg-cdi-text"></span>
+        <span data-nav-line="3" class="block w-6 h-0.5 bg-cdi-text"></span>
       </button>
     </div>
   </div>
@@ -51,7 +51,8 @@ const navLinks = [
   <!-- Mobile menu overlay -->
   <div
     id="mobile-menu"
-    class="fixed inset-0 z-50 bg-cdi-bg/95 backdrop-blur-md flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden"
+    class="fixed inset-0 z-50 flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none lg:hidden"
+    style="background-color: rgba(13,11,10,0.97); backdrop-filter: blur(12px);"
   >
     <button
       id="menu-close"
@@ -80,38 +81,3 @@ const navLinks = [
     </a>
   </div>
 </nav>
-
-<script>
-  const navbar = document.getElementById('navbar')!;
-  const menuToggle = document.getElementById('menu-toggle')!;
-  const menuClose = document.getElementById('menu-close')!;
-  const mobileMenu = document.getElementById('mobile-menu')!;
-  const mobileLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
-
-  // Glassmorphism on scroll (FR-02)
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 80) {
-      navbar.classList.add('bg-cdi-bg/80', 'backdrop-blur-md', 'shadow-lg', 'shadow-black/20');
-    } else {
-      navbar.classList.remove('bg-cdi-bg/80', 'backdrop-blur-md', 'shadow-lg', 'shadow-black/20');
-    }
-  });
-
-  function openMenu() {
-    mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
-    mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
-    menuToggle.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeMenu() {
-    mobileMenu.classList.add('opacity-0', 'pointer-events-none');
-    mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
-    menuToggle.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  }
-
-  menuToggle.addEventListener('click', openMenu);
-  menuClose.addEventListener('click', closeMenu);
-  mobileLinks.forEach((link) => link.addEventListener('click', closeMenu));
-</script>

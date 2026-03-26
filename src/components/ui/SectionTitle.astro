@@ -7,13 +7,16 @@ interface Props {
 const { eyebrow, title } = Astro.props;
 ---
 
-<div class="text-center mb-12">
+<div
+  class="sticky top-8 z-10 origin-top-left mb-12"
+  data-sticky-scale
+>
   {eyebrow && (
-    <span class="text-cdi-accent font-body font-semibold text-sm tracking-widest uppercase mb-3 block">
+    <span class="text-[0.75rem] text-cdi-accent font-body font-semibold uppercase tracking-[0.15em] mb-3 block">
       {eyebrow}
     </span>
   )}
-  <h2 class="font-display font-extrabold text-3xl md:text-4xl lg:text-5xl text-cdi-text">
+  <h2 class="type-section font-display font-bold text-cdi-text">
     {title}
   </h2>
 </div>

@@ -38,6 +38,9 @@ const ogImage = new URL('/og-image.png', Astro.site);
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+
+    <!-- Progressive enhancement: set js-enabled before first paint -->
+    <script>document.documentElement.classList.add('js-enabled')</script>
   </head>
   <body class="grain">
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-cdi-accent focus:text-cdi-bg focus:px-4 focus:py-2 focus:rounded-md focus:font-semibold">
@@ -47,22 +50,8 @@ const ogImage = new URL('/og-image.png', Astro.site);
     <slot />
 
     <script>
-      // Intersection Observer for scroll animations (FR-09)
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.2 }
-      );
-
-      document.querySelectorAll('.animate-on-scroll').forEach((el) => {
-        observer.observe(el);
-      });
+      import { initAnimations } from '../scripts/animations';
+      initAnimations();
     </script>
   </body>
 </html>

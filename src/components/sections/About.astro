@@ -1,6 +1,4 @@
 ---
-import SectionTitle from '../ui/SectionTitle.astro';
-
 const team = [
   {
     initials: 'RV',
@@ -17,34 +15,38 @@ const team = [
 ];
 ---
 
-<section id="equipo" class="py-24 lg:py-32">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="animate-on-scroll">
-      <SectionTitle eyebrow="Quiénes somos" title="Nuestro Equipo" />
-    </div>
+<section id="equipo" class="editorial-section bg-cdi-bg">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-[clamp(3rem,6vw,6rem)]">
+    {team.map((member, i) => (
+      <div
+        class:list={[
+          'group',
+          i === 1 && 'md:border-l md:border-cdi-border md:pl-[clamp(2rem,4vw,4rem)]',
+        ]}
+        data-reveal
+      >
+        <!-- Role eyebrow above name -->
+        <span class="block text-sm text-cdi-accent uppercase tracking-widest mb-3">
+          {member.role}
+        </span>
 
-    <p class="text-cdi-text-muted text-lg text-center max-w-3xl mx-auto mb-16 leading-relaxed animate-on-scroll">
-      CDI Desarrollos nació de una idea simple: que las empresas merecen tecnología pensada para ellas.
-      Somos un equipo familiar de profesionales que combina experiencia en análisis de sistemas con
-      desarrollo moderno para crear soluciones digitales que realmente funcionan.
-    </p>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-      {team.map((member, i) => (
-        <div
-          class="animate-on-scroll rounded-2xl border border-cdi-border bg-cdi-surface/40 p-8 text-center"
-          style={`animation-delay: ${i * 150}ms`}
+        <!-- Name as typographic statement -->
+        <h3
+          class="font-display font-extrabold leading-[0.95] tracking-tight text-cdi-text"
+          style="font-size: var(--font-size-name);"
         >
-          <!-- Initials placeholder avatar -->
-          <div class="mx-auto mb-5 flex h-24 w-24 items-center justify-center rounded-full bg-cdi-accent/10 border-2 border-cdi-accent/30">
-            <span class="font-display font-extrabold text-2xl text-cdi-accent">{member.initials}</span>
-          </div>
+          {member.name}
+        </h3>
 
-          <h3 class="font-display font-bold text-xl text-cdi-text mb-1">{member.name}</h3>
-          <span class="text-cdi-accent font-semibold text-sm mb-4 block">{member.role}</span>
-          <p class="text-cdi-text-muted text-sm leading-relaxed">{member.bio}</p>
-        </div>
-      ))}
-    </div>
+        <!-- Bio: visible always, enhanced hover reveal on desktop -->
+        <p class="text-cdi-text-muted text-[length:var(--font-size-subtitle)] mt-4 leading-relaxed max-h-0 overflow-hidden opacity-0 group-hover:max-h-40 group-hover:opacity-100 transition-all duration-500 md:max-h-0 md:opacity-0 md:group-hover:max-h-40 md:group-hover:opacity-100">
+          {member.bio}
+        </p>
+        <!-- Bio fallback: always visible on mobile (no-JS safe) -->
+        <p class="text-cdi-text-muted text-[length:var(--font-size-subtitle)] mt-4 leading-relaxed md:hidden">
+          {member.bio}
+        </p>
+      </div>
+    ))}
   </div>
 </section>
