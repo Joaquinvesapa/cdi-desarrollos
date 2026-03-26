@@ -1,0 +1,117 @@
+---
+const navLinks = [
+  { label: 'Servicios', href: '#servicios' },
+  { label: 'Por Qué Nosotros', href: '#por-que-nosotros' },
+  { label: 'Equipo', href: '#equipo' },
+  { label: 'Contacto', href: '#contacto' },
+];
+---
+
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-20 items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="font-display font-extrabold text-xl text-cdi-text tracking-tight">
+        CDI <span class="text-cdi-accent">Desarrollos</span>
+      </a>
+
+      <!-- Desktop nav -->
+      <div class="hidden lg:flex items-center gap-8">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="text-cdi-text-muted hover:text-cdi-accent transition-colors duration-200 text-sm font-medium"
+          >
+            {link.label}
+          </a>
+        ))}
+        <a
+          href="#contacto"
+          class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-cdi-accent text-cdi-bg font-semibold text-sm transition-all duration-300 hover:bg-cdi-accent-dark hover:scale-105"
+        >
+          Hablemos
+        </a>
+      </div>
+
+      <!-- Hamburger -->
+      <button
+        id="menu-toggle"
+        type="button"
+        class="lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 cursor-pointer"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+      >
+        <span class="hamburger-line w-6 h-0.5 bg-cdi-text transition-all duration-300"></span>
+        <span class="hamburger-line w-6 h-0.5 bg-cdi-text transition-all duration-300"></span>
+        <span class="hamburger-line w-6 h-0.5 bg-cdi-text transition-all duration-300"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu overlay -->
+  <div
+    id="mobile-menu"
+    class="fixed inset-0 z-50 bg-cdi-bg/95 backdrop-blur-md flex flex-col items-center justify-center gap-8 opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden"
+  >
+    <button
+      id="menu-close"
+      type="button"
+      class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center text-cdi-text cursor-pointer"
+      aria-label="Cerrar menú"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    {navLinks.map((link) => (
+      <a
+        href={link.href}
+        class="mobile-nav-link text-2xl font-display font-bold text-cdi-text hover:text-cdi-accent transition-colors"
+      >
+        {link.label}
+      </a>
+    ))}
+    <a
+      href="#contacto"
+      class="mobile-nav-link mt-4 inline-flex items-center justify-center px-8 py-3 rounded-lg bg-cdi-accent text-cdi-bg font-semibold text-lg transition-all hover:bg-cdi-accent-dark"
+    >
+      Hablemos
+    </a>
+  </div>
+</nav>
+
+<script>
+  const navbar = document.getElementById('navbar')!;
+  const menuToggle = document.getElementById('menu-toggle')!;
+  const menuClose = document.getElementById('menu-close')!;
+  const mobileMenu = document.getElementById('mobile-menu')!;
+  const mobileLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
+
+  // Glassmorphism on scroll (FR-02)
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) {
+      navbar.classList.add('bg-cdi-bg/80', 'backdrop-blur-md', 'shadow-lg', 'shadow-black/20');
+    } else {
+      navbar.classList.remove('bg-cdi-bg/80', 'backdrop-blur-md', 'shadow-lg', 'shadow-black/20');
+    }
+  });
+
+  function openMenu() {
+    mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+    mobileMenu.classList.add('opacity-100', 'pointer-events-auto');
+    menuToggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMenu() {
+    mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+    mobileMenu.classList.remove('opacity-100', 'pointer-events-auto');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  menuToggle.addEventListener('click', openMenu);
+  menuClose.addEventListener('click', closeMenu);
+  mobileLinks.forEach((link) => link.addEventListener('click', closeMenu));
+</script>

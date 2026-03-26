@@ -1,0 +1,20 @@
+---
+interface Props {
+  variant: 'primary' | 'ghost';
+  href: string;
+  label: string;
+}
+
+const { variant, href, label } = Astro.props;
+
+const base = 'inline-flex items-center justify-center px-6 py-3 rounded-lg font-body font-semibold text-base transition-all duration-300 cursor-pointer';
+
+const variants = {
+  primary: 'bg-cdi-accent text-cdi-bg hover:bg-cdi-accent-dark hover:scale-105 shadow-lg shadow-cdi-accent/20',
+  ghost: 'border border-cdi-accent text-cdi-accent hover:bg-cdi-accent/10 hover:scale-105',
+};
+---
+
+<a href={href} class:list={[base, variants[variant]]}>
+  {label}
+</a>
