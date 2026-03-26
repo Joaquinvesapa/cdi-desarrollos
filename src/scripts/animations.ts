@@ -143,33 +143,24 @@ function initHeroAnimations(): void {
   const heroCtas = document.querySelector('[data-hero-ctas]');
 
   if (heroTitle) {
-    gsap.from(heroTitle, {
-      opacity: 0,
-      y: 80,
-      duration: 1,
-      ease: 'power3.out',
-      delay: 0.2,
-    });
+    gsap.fromTo(heroTitle,
+      { opacity: 0, y: 80 },
+      { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.2 },
+    );
   }
 
   if (heroSubtitle) {
-    gsap.from(heroSubtitle, {
-      opacity: 0,
-      y: 40,
-      duration: 0.8,
-      ease: 'power3.out',
-      delay: 0.4,
-    });
+    gsap.fromTo(heroSubtitle,
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.4 },
+    );
   }
 
   if (heroCtas) {
-    gsap.from(heroCtas, {
-      opacity: 0,
-      y: 30,
-      duration: 0.8,
-      ease: 'power3.out',
-      delay: 0.6,
-    });
+    gsap.fromTo(heroCtas,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', delay: 0.6 },
+    );
   }
 }
 
@@ -270,6 +261,11 @@ function initParallax(): void {
 
 export function initAnimations(): void {
   registerPlugins();
+
+  // Enable js-enabled class only when GSAP is ready — prevents race condition
+  // where CSS hides [data-reveal] elements before GSAP can animate them
+  document.documentElement.classList.add('js-enabled');
+
   initSmoothScroll();
   initNavAnimations();
   initHeroAnimations();

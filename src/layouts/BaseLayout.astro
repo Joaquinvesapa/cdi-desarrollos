@@ -46,8 +46,7 @@ const ogImage = new URL('/og-image.png', Astro.site);
     <!-- reCAPTCHA v3 -->
     <script src="https://www.google.com/recaptcha/api.js?render=6Lf_cZksAAAAALlJFbjlv52Tpw6548awLle2vW69" async defer></script>
 
-    <!-- Progressive enhancement: set js-enabled before first paint -->
-    <script>document.documentElement.classList.add('js-enabled')</script>
+    <!-- js-enabled is set by animations.ts when GSAP is ready -->
   </head>
   <body class="grain">
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-cdi-accent focus:text-cdi-bg focus:px-4 focus:py-2 focus:rounded-md focus:font-semibold">
